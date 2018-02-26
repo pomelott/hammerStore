@@ -5,13 +5,13 @@ Vue.use(Vuex)
 
 var store = new Vuex.Store({
 	state: {
-		cartList: [],
-		numTotal: 0,
-		priceTotal: 0
+		cartList: [], // 购物车数据
+		numTotal: 0,  // 购物车商品总数量
+		priceTotal: 0 // 购物车商品总价格
 	},
 	mutations: {
 		addCartData (state, data) {
-			let flag = true
+			let flag = true // 是否为未加过的商品(包括规格颜色不同的商品)
 			state.cartList.forEach(goods => {
 				if (goods.sku_id === data.sku_id) {
 					goods.count++
