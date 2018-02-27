@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import comList from '@/components/goods-list'
-import user from '@/components/user'
 import pomelo from '@/components/pomelo'
 Vue.use(Router)
 
@@ -12,10 +11,6 @@ let router = new Router({
     {
       path: '/',
       component: comList
-    },
-    {
-      path: '/user',
-      component: user
     },
     {
       path: '/pomelo',
