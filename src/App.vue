@@ -1,18 +1,27 @@
 <template>
-  <div id="app">
-  	<com-header></com-header>
-  	<com-list></com-list>
+  <div id="app" @click='hideCart'>
+    <com-header></com-header>
+    <!-- <router-link to='/pomelo'>test</router-link> -->
+    <router-view></router-view>
   </div>
 </template>
-
 <script>
 import comHeader from '@/components/header'
-import comList from '@/components/goods-list'
 export default {
   name: 'App',
+  computed: {
+    modelFlag () {
+      return this.$store.state.modelFlag
+    }
+  },
   components: {
-  	comHeader,
-  	comList
+    comHeader
+  },
+  methods: {
+    hideCart () {
+      this.$store.state.cartShowFlag = false
+      console.log('click')
+    }
   }
 }
 </script>

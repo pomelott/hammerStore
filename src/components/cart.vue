@@ -1,5 +1,5 @@
 <template>
-	<div class="nav-cart-wrapper">
+	<div class="nav-cart-wrapper" @click.stop>
 		<div class="nav-cart-list">
 			<div class="empty" v-if='numData<=0'>
 				<h3>购物车为空</h3>
@@ -27,7 +27,7 @@
 											</h6>
 										</div>
 									</div>
-									<div class="del-btn">删除</div>
+									<div class="del-btn" @click='delGoods(item)'>删除</div>
 								</div>
 							</div>
 						</li>
@@ -59,6 +59,11 @@
 		},
 		updated () {
 			// console.log(this.numData)
+		},
+		methods: {
+			delGoods (item) {
+				this.$store.commit('doDelGoods', item)
+			}
 		}
 	}
 </script>
