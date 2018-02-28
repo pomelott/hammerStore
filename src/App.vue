@@ -20,7 +20,7 @@ export default {
   methods: {
     hideCart () {
       this.$store.state.cartShowFlag = false
-      console.log('click')
+      // console.log('根实例冒泡')
     }
   }
 }

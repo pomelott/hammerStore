@@ -56,7 +56,7 @@
 			<div class="nav-sub-wrapper">
 				<div class="container">
 					<ul class="nav-list">
-						<li><a href="javascript:;">首页</a></li>
+						<li><router-link to='/'>首页</router-link></li>
 						<li><a href="javascript:;">手机</a></li>
 						<li><a href="javascript:;">“足迹系列”手感膜</a></li>
 						<li class="active"><a href="javascript:;">官方配件</a></li>
@@ -98,8 +98,8 @@
 			beforeEnter (el) {
 				let btnRect = this.ball.el.getBoundingClientRect()// 点击按钮的位置对象
 				let cartBoxRect = document.querySelector('.cart-num').getBoundingClientRect()// 购物车图标的位置对象
-				let x = (cartBoxRect.left + cartBoxRect.width / 2) - (btnRect.left + btnRect.width / 2)// 两个位置的水平距离
-				let y = (btnRect.top + btnRect.height / 2) - (cartBoxRect.top + cartBoxRect.height / 2)// 两个位置的垂直距离
+				let x = (cartBoxRect.left + cartBoxRect.width / 2) - (btnRect.left + btnRect.width / 2) - 25// 两个位置的水平距离
+				let y = (btnRect.top + btnRect.height / 2) - (cartBoxRect.top + cartBoxRect.height / 2) - 40// 两个位置的垂直距离
 				el.style.transform = 'translateY(' + y + 'px)'// 初始化y轴位移
 				document.querySelector('.ball').style.transform = 'translateX(-' + x + 'px)'// 初始化x轴位移
 				document.querySelector('.ball').src = this.ball.img// 初始化小球的缩略图片
@@ -133,10 +133,10 @@
 	}
 	/*垂直效果为贝塞尔曲线*/
 	.ballWrap-enter-active{
-		transition:all cubic-bezier(.17,.67,.55,.94) .6s;
+		transition:all cubic-bezier(.17,.67,.55,.94) .5s;
 	}
 	/*水平为线性效果*/
 	.ballWrap-enter-active .ball{
-		transition:all linear .6s;
+		transition:all linear .5s;
 	}
 </style>

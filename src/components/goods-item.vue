@@ -10,7 +10,7 @@
 			</ul>
 		</div>
 		<div class="item-btns clearfix">
-			<span class="item-gray-btn"><a href="javascript:;" target="_blank">查看详情</a> </span><span class="item-blue-btn" @click.stop='doAddCartData(item.sku_info[typeIndex])'>加入购物车 </span>
+			<span class="item-gray-btn"><router-link :to="{ path: '/detail',query: { gid: item.sku_info[typeIndex].sku_id }}">查看详情</router-link></span><span class="item-blue-btn" @click.stop='doAddCartData(item.sku_info[typeIndex])'>加入购物车 </span>
 		</div>
 		<div class="item-price clearfix">
 			<i>¥</i><span>{{ item.price }}</span>
@@ -34,7 +34,8 @@
 				this.typeIndex = index
 			},
 			doAddCartData (data) {
-				this.$store.commit('addCartData', data)
+				let itemData = {itemInfo: data,count: 1}
+				this.$store.commit('addCartData', itemData)
 			}
 		}
 	}

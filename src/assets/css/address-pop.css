@@ -204,6 +204,9 @@
     background: url(../img/checkbox-bg.png) no-repeat;
     cursor: pointer;
 }
+.blue-checkbox-on{
+    background-position: 0% 100% !important;
+}
 #pop .address-form .blue-checkbox{
     top: 0;
     float: left;
