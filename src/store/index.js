@@ -49,6 +49,7 @@ var store = new Vuex.Store({
 		orderList:[]
 	},
 	mutations: {
+		// 将商品列表添加至购物车
 		addCartData (state, data) {
 			let flag = true// 是否为未加过的商品(包括规格颜色不同的商品)
 			if (!state.ball.show) { // 小球未显示时才能继续添加商品(用于解决连续点击的bug)
@@ -79,6 +80,7 @@ var store = new Vuex.Store({
 				}
 			}
 		},
+		// 从购物车删除商品
 		doDelGoods (state, data) {
 			let nowIndex = state.cartList.indexOf(data)
 			// let nowCount = state.cartList[nowIndex].count
@@ -88,6 +90,7 @@ var store = new Vuex.Store({
 				state.cartList.splice(nowIndex, 1)
 			// }
 		},
+		// 在购物车中增加商品
 		plusCartNum (state, id) {
 			state.cartList.forEach((goods) => {
 				if (goods.sku_id === id) {
@@ -96,6 +99,7 @@ var store = new Vuex.Store({
 				}
 			})
 		},
+		// 在购物车中减少商品
 		subCartNum (state, id) {
 			state.cartList.forEach((goods) => {
 				if (goods.sku_id === id) {
@@ -104,15 +108,19 @@ var store = new Vuex.Store({
 				}
 			})
 		},
+		// 关闭模态框
 		closeModel (state) {
 			state.modelFlag = false
 		},
+		// 控制头部的购物车显示
 		showCart (state) {
 			state.cartShowFlag = true
 		},
+		// 控制头部的购物车消失
 		hideCart (state) {
 			state.cartShowFlag = false
 		},
+		// 购物车中控制商品是否选中
 		changeChecked (state, id) {
 			state.cartList.forEach((goods) => {
 				if (goods.sku_id === id) {
@@ -120,6 +128,7 @@ var store = new Vuex.Store({
 				}
 			})
 		},
+		// 控制购物车中的全选
 		changeAllChecked (state, allChecked) {
 			state.cartList.forEach((goods) => {
 				goods.checked = !allChecked
@@ -155,6 +164,14 @@ var store = new Vuex.Store({
 					state.cartList.splice(i, 1)
 				}
 			}
+		},
+		// 支付完成
+		payOrdNow (state, ordId) {
+			state.orderList.forEach((ord) => {
+				if (ord.orderId === ordId) {
+					ord.isPay = true
+				}
+			})
 		}
 	},
 	actions: {

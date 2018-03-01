@@ -26,13 +26,15 @@
 		props: ['item'],
 		data () {
 			return {
-				typeIndex: 0
+				typeIndex: 0// 商品当前选中的颜色索引
 			}
 		},
 		methods: {
+			// 切换列表商品颜色
 			show (index) {
 				this.typeIndex = index
 			},
+			// 向购物车添加商品
 			doAddCartData (data) {
 				let itemData = {itemInfo: data,count: 1}
 				this.$store.commit('addCartData', itemData)

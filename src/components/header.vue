@@ -16,7 +16,7 @@
 									<dt class="ng-binding">+86 138****9453</dt>
 								</dl>
 								<ul>
-									<li class="order"><a href="javascript:;">我的订单</a></li>
+									<li class="order"><router-link to='/account'>我的订单</router-link></li>
 									<li class="support"><a href="javascript:;">售后服务</a></li>
 									<li class="coupon"><a href="javascript:;">我的优惠</a></li>
 									<li class="information"><a href="javascript:;">账户资料</a></li>
@@ -42,11 +42,12 @@
 					</li>
 				</ul>
 				<ul class="nav-list">
-					<li><a href="javascript:;">在线商城</a></li>
-					<li><a href="javascript:;">坚果 Pro</a></li>
-					<li><a href="javascript:;">Smartisan M1 / M1L</a></li>
-					<li><a href="javascript:;">Smartisan OS</a></li>
-					<li><a href="javascript:;">欢喜云</a></li>
+					<li><router-link to='/'>在线商城</router-link></li>
+					<li><router-link to='/'>坚果 Pro</router-link></li>
+					<li><router-link to='/'>Smartisan M1 / M1L</router-link></li>
+					<li><router-link to='/'>Smartisan OS</router-link></li>
+					<li><router-link to='/'>欢喜云</router-link></li>
+					<li><router-link to='/'>在线商城</router-link><li>
 					<li><a href="javascript:;">应用下载</a></li>
 					<li><a href="javascript:;">官方论坛</a></li>
 				</ul>
@@ -59,7 +60,7 @@
 						<li><router-link to='/'>首页</router-link></li>
 						<li><a href="javascript:;">手机</a></li>
 						<li><a href="javascript:;">“足迹系列”手感膜</a></li>
-						<li class="active"><a href="javascript:;">官方配件</a></li>
+						<li class="active"><router-link to='/'>官方配件</router-link></li>
 						<li><a href="javascript:;">周边产品</a></li>
 						<li><a href="javascript:;">第三方配件</a></li>
 						<li><a href="javascript:;">全部商品</a></li>
@@ -78,23 +79,29 @@
 			cart
 		},
 		computed: {
+			// 购物车商品总数量
 			numData () {
 				return this.$store.getters.calNumToal
 			},
+			// 是否显示头部购物车组件
 			cartShowFlag () {
 				return this.$store.state.cartShowFlag
 			},
+			// 小球数据
 			ball () {
 				return this.$store.state.ball
 			}
 		},
 		methods: {
+			// 显示头部购物车
 			...mapMutations({
 				'showCart': 'showCart'
 			}),
+			// 隐藏头部购物车
 			...mapActions({
 				'hideCart': 'hideCartAct'
 			}),
+			// 小球transition钩子函数
 			beforeEnter (el) {
 				let btnRect = this.ball.el.getBoundingClientRect()// 点击按钮的位置对象
 				let cartBoxRect = document.querySelector('.cart-num').getBoundingClientRect()// 购物车图标的位置对象
@@ -104,6 +111,7 @@
 				document.querySelector('.ball').style.transform = 'translateX(-' + x + 'px)'// 初始化x轴位移
 				document.querySelector('.ball').src = this.ball.img// 初始化小球的缩略图片
 			},
+			// 小球transition钩子函数
 			enter (el) {
 				// 更新el用于触发transition
 				let a = el.offsetHeight
@@ -112,6 +120,7 @@
 				el.style.transform = 'translateY(' + -25 + 'px)'
 				document.querySelector('.ball').style.transform = 'translateX(' + 0 + ')'
 			},
+			// 小球transition钩子函数
 			afterEnter (el) {
 				this.ball.show = false
 			}

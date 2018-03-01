@@ -21,7 +21,7 @@
 	</div>
 </template>
 <script>
-	import goodsData from '@/lib/newGoodsData'
+	import goodsData from '@/lib/newGoodsData'// 商品列表数据
 	import goodsItem from '@/components/goods-item'
 	import prompt from '@/components/prompt'
 	export default {
@@ -31,6 +31,7 @@
 			}
 		},
 		computed: {
+			// 是否显示商品数量上限提示框
 			modelFlag () {
 				return this.$store.state.modelFlag
 			}

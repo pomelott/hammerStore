@@ -104,14 +104,14 @@
 		</div>
 </template>
 <script>
-	import addPop from '@/components/address-pop'
+	import addPop from '@/components/address-pop'// 已有地址信息
 	export default {
 		data () {
 			return {
-		        addIndex: 0,
-		        popShow: false,
-		        invoice: {
-		        	personal: false,
+		        addIndex: 0,// 当前选中的地址（默认地址）索引
+		        popShow: false,// 是否显示新增地址模态框
+		        invoice: { // 发票信息
+		        	personal: false,// 是否为个人
 		        	headText: ''
 		        }
 			}
@@ -120,12 +120,15 @@
 			addPop
 		},
 		computed: {
+			// 购物车中选中的商品
 			toCheckGoods () {
 				return this.$store.getters.toCheckGoods
 			},
+			// 购物车中选中的商品总价
 			choseAllTotalPrice () {
 				return this.$store.getters.choseAllTotalPrice
 			},
+			// 根据商品价格计算的运费
 			transFee () {
 				let trans = 8
 				if (this.choseAllTotalPrice >= 88 || this.choseAllTotalPrice === 0) {
@@ -133,33 +136,39 @@
 				}
 				return trans
 			},
+			// 地址列表
 			addList () {
 				return this.$store.state.receiveInfo
 			}
 		},
 		methods: {
+			// 选择默认地址
 			selectAdd (index) {
 				this.addIndex = index
 			},
+			// 关闭新增地址模态框后，判断新增地址是否选择了设为默认
 			popHandle () {
 				this.popShow = false
 				this.$store.state.receiveInfo.forEach((item, index) => {
 					if (item.default === true) {
 						this.addIndex = index
 					}
-					// console.log(item.default)
 				})
-				// console.log(this.addIndex)
 			},
+			// 显示新增地址模态框
 			showAddPop () {
 				this.popShow = true
 			},
+			// 控制选择发票抬头
 			invoiceChecked (boo) {
 				this.invoice.personal = boo
 			},
+			// 提交订单
 			subOrder () {
 				let nowOrderAdd = this.$store.state.receiveInfo[this.addIndex]
-				if (!this.invoice.personal && !this.invoice.headText) return
+				if (!this.invoice.personal && !this.invoice.headText) {
+					alert(`公司抬头为必填项！`) // 简易正则判断
+				}
 				if (this.invoice.personal) {
 					this.invoice.headText = '个人'
 				}

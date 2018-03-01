@@ -81,10 +81,11 @@
   </div>
 </template>
 <script>
-  import mapList from '@/lib/addList'
+  import mapList from '@/lib/addList'// 省市县地址数据
   export default {
     data () {
         return {
+          // 临时地址数据
           receive: {
             'name':'',
             'phone': '',
@@ -101,15 +102,17 @@
             'checked': false
           },
           mapList,
-          phoneErr: false,
-          nameErr: false,
-          allChecked: false
+          phoneErr: false,// 手机号码检测
+          nameErr: false,// 姓名检测
+          allChecked: false// 检测地址数据是否填写完整
         }
     },
     methods: {
+      // 关闭新增地址弹出窗
       closePopHandle () {
         this.$emit('closepop')
       },
+      // 判断电话格式是否合理
       judgePhone () {
         if (this.receive.phone.length === 11) {
           this.phoneErr = false
@@ -117,6 +120,7 @@
           this.phoneErr = true
         }
       },
+      // 判断地址姓名是否合理
       judgeName () {
         let reg = /^[\u4e00-\u9fa5_a-zA-Z]{2,12}$/g
         console.log(this.receive.name.match(reg))
@@ -126,15 +130,18 @@
           this.nameErr = true
         }
       },
+      // 设置是否为默认地址
       setDefault () {
         this.receive.default = !this.receive.default
       },
+      // 保存新增数据
       saveNewAddHandle () {
         this.$store.commit('saveNewAdd', this.receive)
         this.$emit('closepop')// 触发自定义事件closepop必须在commit之后(保证新增的地址先被提交至store中)
       }
     },
     computed: {
+      // 过滤市数据
       cityList () {
         let city = []
         this.mapList.forEach((item) => {
@@ -144,6 +151,7 @@
         })
         return city
       },
+      // 过滤县乡数据
       countyList () {
         let county = []
         this.cityList.forEach((item) => {
@@ -154,10 +162,8 @@
         return county
       }
     },
-    created () {
-      console.log(this.mapList)
-    },
     watch: {
+      // 监控省下拉菜单
       'receive.provinceId': function (val) {
           this.mapList.forEach((item) => {
             if (item.area_id === val) {
@@ -169,6 +175,7 @@
             this.receive.countyId = 0
           }
       },
+      // 监控市下拉菜单
       'receive.cityId': function (val) {
           if (val === '0') {
             this.receive.countyId = 0
@@ -179,6 +186,7 @@
             }
           })
       },
+      // 监控县区下拉菜单
       'receive.countyId': function (val) {
           this.countyList.forEach((item) => {
             if (item.area_id === val) {
@@ -186,10 +194,9 @@
             }
           })
       },
+      // 检测数据是否填写完整
       receive: {
         handler () {
-          // console.log(this.receive.province)
-          // console.log(this.receive.provinceId)
           if (!this.phoneErr && this.receive.name && this.receive.phone && !this.nameErr && this.receive.province && this.receive.city && this.receive.county && this.receive.add) {
             this.allChecked = true
           } else {

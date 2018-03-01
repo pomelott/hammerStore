@@ -48,20 +48,21 @@
 <script>
 	export default {
 		computed: {
+			// 购物车数据
 			cartData () {
 				return this.$store.state.cartList
 			},
+			// 购物车商品总数
 			numData () {
 				return this.$store.getters.calNumToal
 			},
+			// 购物车商品总价
 			totalPriceData () {
 				return this.$store.getters.calPriceTotal
 			}
 		},
-		updated () {
-			// console.log(this.numData)
-		},
 		methods: {
+			// 提交删除商品
 			delGoods (item) {
 				this.$store.commit('doDelGoods', item)
 			}

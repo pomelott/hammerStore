@@ -79,27 +79,29 @@
 					return Number(this.$route.query.gid) === goods.sku_id
 				})[0]
 			},
+			// 详情页增加商品数量到达上限后弹出提示框
 			modelFlag () {
 				return this.$store.state.modelFlag
 			}
 		},
-		created () {
-			console.log(this.count)
-		},
 		methods: {
+			// 详情页左侧点击切换图片
 			changePic (index) {
 				this.chooseIndex = index
 			},
+			// 向购物车添加商品
 			doAddCartData () {
 				let itemData = {itemInfo: this.detailItem,count: this.count}
 				this.$store.commit('addCartData', itemData)
 			},
+			// 增加商品数量
 			addCount () {
 				this.count++
 				if (this.count > this.detailItem.limit_num) {
 					this.count = this.detailItem.limit_num
 				}
 			},
+			// 减少商品数量
 			subCount () {
 				this.count--
 				if (this.count < 1) {
@@ -108,7 +110,7 @@
 			}
 		},
 		watch: {
-			// 监控路由变化后，将缩略图索引值改为0
+			// 监控路由变化后，点击切换颜色后，将缩略图索引值改为0
 			'$route.query.gid' () {
 				this.chooseIndex = 0
 			}

@@ -11,9 +11,10 @@
     	            <p class="payment-detail">我们将在您完成支付后的 72 小时内发货</p>
     	        </div>
     	        <div class="box-inner payment-checkout-panel clear">
-    	            <span class="jianguo-blue-main-btn big-main-btn js-payment-order">
+    	            <span class="jianguo-blue-main-btn big-main-btn js-payment-order" @click.stop='payNow' v-if='!payOrder.isPay'>
     	                <a>现在支付</a>
     	            </span>
+                    <span class="is-pay" v-else>已完成</span>
     	            <span class="prices"> 应付金额：   <em><span>¥ </span>{{payOrder.orderTrans + payOrder.orderTotalPrice}}.00</em>   </span>
     	        </div>
     	    </div>
@@ -74,6 +75,15 @@
         },
         created () {
             console.log(this.payOrder)
+        },
+        methods: {
+            // 现在支付
+            payNow () {
+                // 支付完成后提交删除购物车中已选中的商品
+                this.$store.commit('payOrdNow', this.$route.query.orderId)
+                // 无支付接口，简易的支付提示
+                alert(`成功支付${this.payOrder.orderTotalPrice + this.payOrder.orderTrans}元`)
+            }
         }
     }
 </script>

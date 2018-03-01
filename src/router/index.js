@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import comList from '@/components/goods-list'
-import pomelo from '@/components/pomelo'
 import detail from '@/components/detail'
 import cart from '@/components/checkCart'
 import checkout from '@/components/checkout'
 import pay from '@/components/pay'
+import account from '@/components/account'
+import myOrder from '@/components/myOrder'
 Vue.use(Router)
 
 let router = new Router({
@@ -14,10 +15,6 @@ let router = new Router({
     {
       path: '/',
       component: comList
-    },
-    {
-      path: '/pomelo',
-      component: pomelo
     },
     {
       path:'/detail',
@@ -34,6 +31,17 @@ let router = new Router({
     {
       path: '/pay',
       component: pay
+    },
+    {
+      path: '/account',
+      component: account,
+      children: [
+        {
+          path: '',
+          name: 'order',
+          component: myOrder
+        }
+      ]
     }
   ]
 })

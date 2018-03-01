@@ -108,32 +108,41 @@
 			totalPrice () {
 				return this.$store.getters.calPriceTotal
 			},
+			// 是否全选
 			allChecked () {
 				return this.$store.getters.judgeAllChecked
 			},
+			// 选中的商品总数
 			choseAllNum () {
 				return this.$store.getters.choseAllNum
 			},
+			// 选中的商品总价格
 			choseAllPrice () {
 				return this.$store.getters.choseAllTotalPrice
 			}
 		},
 		methods: {
+			// 提交删除商品
 			delGoods (item) {
 				this.$store.commit('doDelGoods', item)
 			},
+			// 提交增加商品数量
 			plusCartNumHandle (id) {
 				this.$store.commit('plusCartNum', id)
 			},
+			// 提交减少商品数量
 			subCartNumHandle (id) {
 				this.$store.commit('subCartNum', id)
 			},
+			// 提交改变选中状态
 			changeChecked (id) {
 				this.$store.commit('changeChecked', id)
 			},
+			// 提交改变全选状态
 			changeAllChecked (allChecked) {
 				this.$store.commit('changeAllChecked', allChecked)
 			},
+			// 提交删除选中商品
 			delChoseGoods () {
 				this.$store.commit('delChoseGoods')
 			}
